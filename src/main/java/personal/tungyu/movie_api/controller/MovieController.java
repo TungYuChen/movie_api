@@ -19,6 +19,11 @@ public class MovieController {
 
     private final MovieService movieService;
 
+    /**
+     * Create Movie with some basic information
+     * @param movieRequest
+     * @return String to show the result and feedback
+     */
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public String createMovie(@RequestBody MovieRequest movieRequest) {
@@ -29,24 +34,45 @@ public class MovieController {
             return "Create movie failed";
     }
 
+    /**
+     * Get one movie by id
+     * @param id
+     * @return Movie details if extist
+     */
     @GetMapping("/id={id}")
     @ResponseStatus(HttpStatus.OK)
     public Movie findMovieById(@PathVariable Long id) {
         return movieService.findMovieById(id);
     }
 
+    /**
+     * Get a movie by title (should match all)
+     * @param title
+     * @return Movie details if exist
+     */
     @GetMapping("/title={title}")
     @ResponseStatus(HttpStatus.OK)
     public Movie findMovieByTitle(@PathVariable String title) {
         return movieService.findMovieByTitle(title);
     }
 
+    /**
+     * Modify specific movie
+     * @param id
+     * @param movieRequest
+     * @return Movie details if success
+     */
     @PatchMapping("/update/id={id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Movie modifyMovieById(@PathVariable long id, @RequestBody ModifyMovieRequest movieRequest) {
         return movieService.modifyMovie(id, movieRequest);
     }
 
+    /**
+     * Delete a movie by id
+     * @param id
+     * @return result string
+     */
     @DeleteMapping("delete/id={id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteMovieById(@PathVariable long id) {
@@ -56,6 +82,11 @@ public class MovieController {
             return "No such movie id";
     }
 
+    /**
+     * Add like count to a movie
+     * @param input
+     * @return boolean to tell successful or not
+     */
     @PatchMapping("/like/")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public boolean likeMovie(@RequestBody IdInputRequest input) {
@@ -63,6 +94,11 @@ public class MovieController {
         return movieService.likeMovie(id);
     }
 
+    /**
+     * Add dislike count to a movie
+     * @param input
+     * @return boolean to tell successful or not
+     */
     @PatchMapping("/dislike/")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public boolean dislikeMovie(@PathVariable IdInputRequest input) {
@@ -71,6 +107,11 @@ public class MovieController {
     }
 
 
+    /**
+     * Get movies including the string in title
+     * @param title
+     * @return a list of movies
+     */
     @GetMapping("/movies/t={title}")
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> findMoviesByTitle(@PathVariable String title) {

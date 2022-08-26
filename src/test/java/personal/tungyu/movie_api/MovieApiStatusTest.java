@@ -77,9 +77,9 @@ public class MovieApiStatusTest {
         movieController.likeMovie(new IdInputRequest(6));
         movieController.dislikeMovie(new IdInputRequest(6));
 
-       movie = movieController.findMovieById((long) 6);
+        movie = movieController.findMovieById((long) 6);
 
-       assert (movie.getLikes()) == likes + 1;
-       assert (movie.getDislikes()) == dislikes + 1;
+        assert (movie.getLikes()) == likes + 1;
+        assert (movie.getDislikes()) == dislikes + 1;
     }
 }
