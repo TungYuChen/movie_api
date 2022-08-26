@@ -1,10 +1,9 @@
 package personal.tungyu.movie_api.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import personal.tungyu.movie_api.entity.Movie;
-import personal.tungyu.movie_api.model.ModifyMovieRequest;
-import personal.tungyu.movie_api.model.MovieRequest;
+import personal.tungyu.movie_api.dto.ModifyMovieRequest;
+import personal.tungyu.movie_api.dto.MovieRequest;
 import personal.tungyu.movie_api.repository.MovieRepository;
 
 import java.lang.module.FindException;
@@ -62,6 +61,20 @@ public record MovieService(MovieRepository movieRepository) {
             return false;
         }
 
+    }
+
+    public boolean likeMovie(long id) {
+        Movie targetMovie = movieRepository.findById(id).orElseThrow(() -> new FindException("It's not a valid id"));
+        targetMovie.setLikes(targetMovie.getLikes() + 1);
+        movieRepository.save(targetMovie);
+        return true;
+    }
+
+    public boolean dislikeMovie(long id) {
+        Movie targetMovie = movieRepository.findById(id).orElseThrow(() -> new FindException("It's not a valid id"));
+        targetMovie.setDislikes(targetMovie.getDislikes() + 1);
+        movieRepository.save(targetMovie);
+        return true;
     }
 
 }

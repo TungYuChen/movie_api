@@ -1,9 +1,8 @@
-package personal.tungyu.movie_api.model;
+package personal.tungyu.movie_api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import org.springframework.lang.Nullable;
 
 

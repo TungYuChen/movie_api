@@ -4,10 +4,10 @@ package personal.tungyu.movie_api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import personal.tungyu.movie_api.dto.IdInputRequest;
 import personal.tungyu.movie_api.entity.Movie;
-import personal.tungyu.movie_api.model.ModifyMovieRequest;
-import personal.tungyu.movie_api.model.MovieRequest;
-import personal.tungyu.movie_api.repository.MovieRepository;
+import personal.tungyu.movie_api.dto.ModifyMovieRequest;
+import personal.tungyu.movie_api.dto.MovieRequest;
 import personal.tungyu.movie_api.service.MovieService;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class MovieController {
 
     private final MovieService movieService;
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public String createMovie(@RequestBody MovieRequest movieRequest) {
         Movie newMovie = movieService.createMovie(movieRequest);
@@ -41,7 +41,7 @@ public class MovieController {
         return movieService.findMovieByTitle(title);
     }
 
-    @PatchMapping("/id={id}")
+    @PatchMapping("/update/id={id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Movie modifyMovieById(@PathVariable long id, @RequestBody ModifyMovieRequest movieRequest) {
         return movieService.modifyMovie(id, movieRequest);
@@ -54,6 +54,20 @@ public class MovieController {
             return "Delete Movie successfully";
         else
             return "No such movie id";
+    }
+
+    @PatchMapping("/like/")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public boolean likeMovie(@RequestBody IdInputRequest input) {
+        long id = input.getId();
+        return movieService.likeMovie(id);
+    }
+
+    @PatchMapping("/dislike/")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public boolean dislikeMovie(@PathVariable IdInputRequest input) {
+        long id = input.getId();
+        return movieService.dislikeMovie(id);
     }
 
 

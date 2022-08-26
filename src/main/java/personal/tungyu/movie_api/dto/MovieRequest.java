@@ -1,4 +1,4 @@
-package personal.tungyu.movie_api.model;
+package personal.tungyu.movie_api.dto;
 
 
 import lombok.*;

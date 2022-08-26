@@ -3,14 +3,12 @@ package personal.tungyu.movie_api.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "movies")
 public class Movie {
 
     public Movie(String title, String description, int releaseYear, float duration, float rating) {
