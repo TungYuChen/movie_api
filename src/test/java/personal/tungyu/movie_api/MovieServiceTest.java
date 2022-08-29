@@ -15,7 +15,7 @@ import java.util.Random;
 
 
 @SpringBootTest
-public class MovieApiStatusTest {
+public class MovieServiceTest {
 
     @Autowired
     private MovieController movieController;
@@ -32,8 +32,9 @@ public class MovieApiStatusTest {
         }
 
         ModifyMovieRequest modifyRequest = new ModifyMovieRequest();
+        modifyRequest.setId((long) 6);
         modifyRequest.setRating(4.7f);
-        movieController.modifyMovieById(6, modifyRequest);
+        movieController.modifyMovieById(modifyRequest);
     }
 
     @Test
@@ -61,8 +62,9 @@ public class MovieApiStatusTest {
         Random random = new Random();
         float rating = random.nextInt(51) / 10;
         ModifyMovieRequest movieRequest = new ModifyMovieRequest();
+        movieRequest.setId((long) 6);
         movieRequest.setRating(rating);
-        movieController.modifyMovieById(6, movieRequest);
+        movieController.modifyMovieById(movieRequest);
         Movie movie = movieController.findMovieById((long) 6);
 
         assert (movie.getRating()) == rating;

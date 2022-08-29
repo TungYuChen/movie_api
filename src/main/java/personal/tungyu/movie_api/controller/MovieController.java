@@ -58,14 +58,13 @@ public class MovieController {
 
     /**
      * Modify specific movie
-     * @param id
      * @param movieRequest
      * @return Movie details if success
      */
-    @PatchMapping("/update/id={id}")
+    @PutMapping("/update/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Movie modifyMovieById(@PathVariable long id, @RequestBody ModifyMovieRequest movieRequest) {
-        return movieService.modifyMovie(id, movieRequest);
+    public Movie modifyMovieById(@RequestBody ModifyMovieRequest movieRequest) {
+        return movieService.modifyMovie(movieRequest);
     }
 
     /**
@@ -101,7 +100,7 @@ public class MovieController {
      */
     @PatchMapping("/dislike/")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public boolean dislikeMovie(@PathVariable IdInputRequest input) {
+    public boolean dislikeMovie(@RequestBody IdInputRequest input) {
         long id = input.getId();
         return movieService.dislikeMovie(id);
     }

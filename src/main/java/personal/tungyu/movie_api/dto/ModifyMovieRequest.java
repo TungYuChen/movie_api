@@ -10,6 +10,7 @@ import org.springframework.lang.Nullable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ModifyMovieRequest {
+    private long id;
     @Nullable
     private String title;
     @Nullable
